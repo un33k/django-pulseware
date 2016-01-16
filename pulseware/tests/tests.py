@@ -10,4 +10,4 @@ class HealthTestCase(TestCase):
     """
 
     def test_meta_none(self):
-        self.assertEqual(1 == 1)
+        self.assertEqual(1, 1)
