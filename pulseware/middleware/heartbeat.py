@@ -17,8 +17,8 @@ class HeartbeatMiddleWare(CommonMiddleware):
         """
         Determines the health of our Django application, back-ends and environment.
         """
-        if request.path == defs.PULSEWARE_PATH:
-            if defs.PULSEWARE_DATABASE_READ_HEALTH:
+        if request.path == defs.PULSEWARE_DEFAULT_SETTINGS.get('PATH'):
+            if defs.PULSEWARE_DEFAULT_SETTINGS.get('DATABASE_READ_HEALTH'):
                 try:
                     Heartbeat.objects.filter().exists()
                 except IntegrityError:
@@ -28,7 +28,7 @@ class HeartbeatMiddleWare(CommonMiddleware):
                 except Exception:
                     return self.send_response("Unknown Database Read Error")
 
-            if defs.PULSEWARE_DATABASE_WRITE_HEALTH:
+            if defs.PULSEWARE_DEFAULT_SETTINGS.get('DATABASE_WRITE_HEALTH'):
                 try:
                     obj = Heartbeat.objects.filter().first()
                     obj.save()
@@ -39,7 +39,7 @@ class HeartbeatMiddleWare(CommonMiddleware):
                 except Exception:
                         return self.send_response("Unknown Database Write Error")
 
-            if defs.PULSEWARE_CACHE_HEALTH:
+            if defs.PULSEWARE_DEFAULT_SETTINGS.get('CACHE_HEALTH'):
                 try:
                     value = 100
                     cache.set('check-my-cache-health', value)

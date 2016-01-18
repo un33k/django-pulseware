@@ -36,12 +36,16 @@ How to use
     # Check health of your Django Application, Back-end & Environment
     # Ensure 'pulseware.middleware.heartbeat.HeartbeatMiddleWare' is the first middleware
     # in `MIDDLEWARE_CLASSES`. Add 'pulseware' to the INSTALLED_APPS.
-    # =========================================================
-    PULSEWARE_PATH = "/heartbeat"           # what path to perform health check
-    PULSEWARE_RETURN_CODE = 503             # what status code to return
-    PULSEWARE_CACHE_HEALTH = False          # check if cache backend is healthy
-    PULSEWARE_DATABASE_READ_HEALTH = True   # check if database read is healthy
-    PULSEWARE_DATABASE_WRITE_HEALTH = False # check if database write is healthy
+    # Also set `PULSEWARE_DEFAULT_SETTINGS` as follow and adjust per your needs.
+    # If `PULSEWARE_DEFAULT_SETTINGS` is not provide, the following default will be used
+    # ===============================================================
+    PULSEWARE_DEFAULT_SETTINGS = {
+        'PATH': '/heartbeat',               # what path to perform health check
+        'RETURN_CODE': 503,                 # what status code to return
+        'CACHE_HEALTH': False,              # check if cache backend is healthy
+        'DATABASE_READ_HEALTH': True,       # check if database read is healthy
+        'DATABASE_WRITE_HEALTH': False      # check if database write is healthy
+    }
    ```
 
 Running the tests
